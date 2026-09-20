@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Girls In Cortex | Squad feminino de tecnologia.</title>
+  <title>Girls In Cortex | Squad feminino de tecnologia</title>
   <meta name="description" content="Girls In Cortex é um squad 100% feminino de tecnologia que atua de ponta a ponta no desenvolvimento de produtos digitais.">
   
   <!-- Fontes Google -->
@@ -12,14 +12,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* RESET E VARIÁVEIS */
+    /* RESET E VARIÁVEIS DE COR */
     :root {
       --primary: #a855f7;
       --bg-black: #000000;
-      --card-bg: #111827;
+      --card-bg: #121214;       /* Cinza escuro quase preto */
+      --card-header: #1a1a1e;   /* Cinza para cabeçalhos de tabela */
       --text-light: #f8fafc;
-      --text-muted: #94a3b8;
-      --border-color: #1f2937;
+      --text-muted: #a1a1aa;
+      --border-color: #27272a;  /* Borda sutil */
     }
 
     * {
@@ -52,7 +53,7 @@
       padding: 0 20px;
     }
 
-    /* ESTILO PARA DEGRADÊ DE CIMA PARA BAIXO (ROSA -> ROXO) */
+    /* DEGRADÊ DE CIMA PARA BAIXO (ROSA -> ROXO) */
     .gradient-text {
       background: linear-gradient(to bottom, #ec4899, #8b5cf6);
       -webkit-background-clip: text;
@@ -124,7 +125,7 @@
       font-weight: 700;
     }
 
-    /* GRID DE SERVIÇOS */
+    /* CARDS DE SERVIÇOS */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -161,6 +162,7 @@
       background-color: var(--card-bg);
       border-radius: 8px;
       overflow: hidden;
+      border: 1px solid var(--border-color);
     }
 
     th, td {
@@ -170,7 +172,7 @@
     }
 
     th {
-      background-color: #1f2937;
+      background-color: var(--card-header);
       color: var(--text-light);
       font-weight: 600;
     }
@@ -185,7 +187,7 @@
       color: var(--text-muted);
     }
 
-    /* FAQ */
+    /* FAQ (PERGUNTAS FREQUENTES) */
     details {
       background-color: var(--card-bg);
       padding: 16px;
@@ -213,6 +215,7 @@
       display: block;
       border-radius: 8px;
       overflow: hidden;
+      border: 1px solid var(--border-color);
     }
 
     .footer-banner img {
@@ -334,7 +337,7 @@
           <tbody>
             <tr>
               <td><strong>soujunior-apoiase-landingpage</strong></td>
-              <td>Auxiliando uma empresa de voluntariado com sua arrecadação; Projeto - Hackaton.</td>
+              <td>[Landing page pra ajudar o voluntariado Sou Junior em seu apoia-se. Projeto - Hackaton.]</td>
             </tr>
           </tbody>
         </table>
@@ -396,10 +399,10 @@
   <footer id="contato">
     <div class="container">
       
-      <!-- ESPAÇO PARA O BANNER -->
-<div class="footer-banner">
-  <img src="banner.png" alt="Banner Girls In Cortex">
-</div>
+      <!-- BANNER DO TECH LAB -->
+      <div class="footer-banner">
+        <img src="banner.png" alt="Banner Girls In Cortex - Tech Lab">
+      </div>
 
       <h2 class="gradient-text">Contato</h2>
       <ul>
