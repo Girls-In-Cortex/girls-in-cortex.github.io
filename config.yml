@@ -1,0 +1,8 @@
+theme: jekyll-theme-cayman
+title: Girls In Cortex
+description: Squad de tecnologia 100% feminino focado no desenvolvimento de ponta a ponta de produtos digitais de alto impacto.
+lang: pt-BR
+url: https://girls-in-cortex.github.io
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
