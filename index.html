@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Girls In Cortex | Squad feminino de tecnologia</title>
+  <title>Girls In Cortex | Squad feminino de tecnologia.</title>
   <meta name="description" content="Girls In Cortex é um squad 100% feminino de tecnologia que atua de ponta a ponta no desenvolvimento de produtos digitais.">
   
   <!-- Fontes Google -->
@@ -15,13 +14,12 @@
   <style>
     /* RESET E VARIÁVEIS */
     :root {
-      --primary: #8b5cf6;
-      --primary-hover: #7c3aed;
-      --bg-dark: #0f172a;
-      --card-bg: #1e293b;
+      --primary: #a855f7;
+      --bg-black: #000000;
+      --card-bg: #111827;
       --text-light: #f8fafc;
       --text-muted: #94a3b8;
-      --border-color: #334155;
+      --border-color: #1f2937;
     }
 
     * {
@@ -32,7 +30,7 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: var(--bg-dark);
+      background-color: var(--bg-black);
       color: var(--text-light);
       line-height: 1.6;
     }
@@ -44,7 +42,7 @@
     }
 
     a:hover {
-      color: var(--primary-hover);
+      color: #ec4899;
       text-decoration: underline;
     }
 
@@ -54,9 +52,17 @@
       padding: 0 20px;
     }
 
+    /* ESTILO PARA DEGRADÊ DE CIMA PARA BAIXO (ROSA -> ROXO) */
+    .gradient-text {
+      background: linear-gradient(to bottom, #ec4899, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
     /* HEADER / NAV */
     header {
-      background-color: rgba(15, 23, 42, 0.9);
+      background-color: rgba(0, 0, 0, 0.95);
       backdrop-filter: blur(10px);
       position: sticky;
       top: 0;
@@ -74,7 +80,6 @@
     nav h1 {
       font-size: 1.5rem;
       font-weight: 700;
-      color: var(--primary);
     }
 
     nav ul {
@@ -95,11 +100,9 @@
     }
 
     .hero h2 {
-      font-size: 2.8rem;
+      font-size: 3rem;
       margin-bottom: 20px;
-      background: linear-gradient(to right, #a855f7, #ec4899);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-weight: 700;
     }
 
     .hero p {
@@ -109,19 +112,19 @@
       margin: 0 auto;
     }
 
-    /* SEÇÕES EM GERAL */
+    /* SEÇÕES */
     section {
       padding: 50px 0;
       border-bottom: 1px solid var(--border-color);
     }
 
     section h2 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       margin-bottom: 24px;
-      color: var(--primary);
+      font-weight: 700;
     }
 
-    /* LISTAS DE SERVIÇOS */
+    /* GRID DE SERVIÇOS */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -146,7 +149,7 @@
       font-size: 0.95rem;
     }
 
-    /* TABELAS (PROJETOS E INTEGRANTES) */
+    /* TABELAS */
     .table-container {
       overflow-x: auto;
     }
@@ -167,7 +170,7 @@
     }
 
     th {
-      background-color: #334155;
+      background-color: #1f2937;
       color: var(--text-light);
       font-weight: 600;
     }
@@ -182,7 +185,7 @@
       color: var(--text-muted);
     }
 
-    /* FAQ (PERGUNTAS FREQUENTES) */
+    /* FAQ */
     details {
       background-color: var(--card-bg);
       padding: 16px;
@@ -202,11 +205,29 @@
       color: var(--text-muted);
     }
 
+    /* BANNER NO RODAPÉ */
+    .footer-banner {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto 30px;
+      display: block;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .footer-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
     /* FOOTER */
     footer {
-      padding: 40px 0;
+      padding: 50px 0;
       text-align: center;
       color: var(--text-muted);
+      background-color: var(--bg-black);
     }
 
     footer ul {
@@ -224,7 +245,7 @@
         gap: 15px;
       }
       .hero h2 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
       footer ul {
         flex-direction: column;
@@ -239,7 +260,7 @@
   <header>
     <div class="container">
       <nav>
-        <h1>Girls In Cortex</h1>
+        <h1 class="gradient-text">Girls In Cortex</h1>
         <ul>
           <li><a href="https://github.com/Girls-In-Cortex" target="_blank">GitHub</a></li>
           <li><a href="#projetos">Projetos</a></li>
@@ -254,13 +275,13 @@
 
     <!-- HERO SECTION -->
     <section class="hero">
-      <h2>Girls In Cortex</h2>
+      <h2 class="gradient-text">Girls In Cortex</h2>
       <p>Squad de tecnologia 100% feminino, focado no desenvolvimento de ponta a ponta de produtos digitais de alto impacto.</p>
     </section>
 
     <!-- QUEM SOMOS -->
     <section id="quem-somos">
-      <h2>Quem somos</h2>
+      <h2 class="gradient-text">Quem somos</h2>
       <p>O Girls In Cortex é um squad feminino multidisciplinar de tecnologia, focado no ciclo completo de desenvolvimento de soluções digitais e inovação.</p>
       <br>
       <p>Nossa equipe reúne profissionais de diversas frentes: Produto, UX/UI, Mentoria, QA, Infraestrutura, Back-end e Front-end. Trabalhamos de forma colaborativa e ágil para desenhar, construir e escalar produtos de alto impacto, unindo excelência técnica e foco na experiência do usuário.</p>
@@ -270,7 +291,7 @@
 
     <!-- O QUE FAZEMOS -->
     <section id="o-que-fazemos">
-      <h2>O que fazemos</h2>
+      <h2 class="gradient-text">O que fazemos</h2>
       <div class="services-grid">
         <div class="service-card">
           <h3>Produto e dados</h3>
@@ -301,7 +322,7 @@
 
     <!-- PROJETOS -->
     <section id="projetos">
-      <h2>Projetos</h2>
+      <h2 class="gradient-text">Projetos</h2>
       <div class="table-container">
         <table>
           <thead>
@@ -313,7 +334,7 @@
           <tbody>
             <tr>
               <td><strong>soujunior-apoiase-landingpage</strong></td>
-              <td>Auxiliando uma empresa voluntária em sua arrecadação. Projeto - Hackaton.</td>
+              <td>Auxiliando uma empresa de voluntariado com sua arrecadação; Projeto - Hackaton.</td>
             </tr>
           </tbody>
         </table>
@@ -323,7 +344,7 @@
 
     <!-- INTEGRANTES -->
     <section id="integrantes">
-      <h2>Integrantes</h2>
+      <h2 class="gradient-text">Integrantes</h2>
       <div class="table-container">
         <table>
           <thead>
@@ -350,7 +371,7 @@
 
     <!-- FAQ -->
     <section id="faq">
-      <h2>Perguntas frequentes</h2>
+      <h2 class="gradient-text">Perguntas frequentes</h2>
       <details>
         <summary>O que é o Girls In Cortex?</summary>
         <p>Um squad feminino multidisciplinar de tecnologia que desenvolve produtos digitais de ponta a ponta.</p>
@@ -374,15 +395,20 @@
   <!-- RODAPÉ E CONTATO -->
   <footer id="contato">
     <div class="container">
-      <h2>Contato</h2>
+      
+      <!-- ESPAÇO PARA O VOSSO BANNER -->
+      <div class="footer-banner">
+        <img src="blob:https://web.whatsapp.com/5be713ea-f6be-494a-8a49-2d111cdb9e44.png" alt="Banner Girls In Cortex">
+      </div>
+
+      <h2 class="gradient-text">Contato</h2>
       <ul>
-        <li><strong>GitHub:</strong> <a href="https://github.com/Girls-In-Cortex" target="_blank">github.com/Girls-In-Cortex</a></li>
-        <li><strong>E-mail:</strong> <a href="mailto:seu-email@dominio.com">[Em breve...]</a></li>
-        <li><strong>LinkedIn:</strong> <a href="#" target="_blank">[Em breve...]</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/Girls-In-Cortex" target="_blank">Github</a></li>
+        <li><strong>E-mail:</strong> <a href="mailto:seu-email@dominio.com">[EM BREVE...]</a></li>
+        <li><strong>LinkedIn:</strong> <a href="#" target="_blank">[EM BREVE...]</a></li>
       </ul>
     </div>
   </footer>
 
 </body>
-  </html>
-  
+</html>
