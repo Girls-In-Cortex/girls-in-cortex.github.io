@@ -245,7 +245,7 @@
 
     /* FOOTER */
     footer {
-      padding: 50px 0 96px;
+      padding: 50px 0 110px;
       text-align: center;
       color: var(--text-muted);
       background-color: var(--bg-black);
@@ -276,20 +276,19 @@
     }
 
     /* =========================================================
-       GATINHO SEGUIDOR, ARCO-ÍRIS, MODO MIAU & MOBILE
+       GATINHO SEGUIDOR / PATRULHA, CHUVA DE GATINHOS & BALÕES
     ========================================================= */
 
-    /* Botão flutuante Modo Miau */
     .chaos-btn {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
+      bottom: 20px;
+      right: 20px;
       background: linear-gradient(135deg, #ec4899, #8b5cf6);
       color: #ffffff;
       font-weight: 600;
       font-family: 'Inter', sans-serif;
       border: none;
-      padding: 12px 18px;
+      padding: 11px 16px;
       border-radius: 999px;
       cursor: pointer;
       box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35);
@@ -302,7 +301,6 @@
       box-shadow: 0 8px 24px rgba(236, 72, 153, 0.45);
     }
 
-    /* Gatinho no desktop: segue o cursor com inércia */
     #cat-follower {
       position: fixed;
       top: 0;
@@ -316,40 +314,34 @@
       transition: opacity 0.2s ease;
     }
 
-    /* Gatinho no celular: mascote clicável no canto inferior esquerdo */
     #cat-follower.is-mobile-mascot {
-      top: auto;
-      left: 20px;
-      bottom: 20px;
       opacity: 1;
       pointer-events: auto;
       cursor: pointer;
-      transform: none;
-      transition: transform 0.2s ease;
       -webkit-tap-highlight-color: transparent;
     }
 
     .cat-sprite {
       display: inline-block;
-      font-size: 1.75rem;
+      font-size: 1.8rem;
       line-height: 1;
       transition: transform 0.15s ease;
     }
 
     #cat-follower.is-mobile-mascot .cat-sprite {
-      font-size: 2.25rem;
-      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+      font-size: 2.15rem;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.55));
     }
 
     .cat-sprite.is-popping {
-      transform: scale(1.32) rotate(-10deg);
+      transform: scale(1.34) rotate(-10deg);
     }
 
     .cat-sprite.is-happy {
       transform: scale(1.18) rotate(8deg);
     }
 
-    /* Partículas do rastro de arco-íris */
+    /* Rastro de arco-íris no desktop */
     .rainbow-trail {
       position: fixed;
       width: 10px;
@@ -373,31 +365,74 @@
       }
     }
 
-    /* Confetes / estrelinhas no Modo Miau ou toque no mascote */
-    .confetti-particle {
+    /* Chuva de gatinhos e emojis */
+    .cat-rain-item {
       position: fixed;
+      top: -40px;
       pointer-events: none;
       user-select: none;
       z-index: 9997;
-      font-size: 1.15rem;
-      animation: confettiFall 1.15s ease-out forwards;
+      font-size: 1.5rem;
+      animation: catRainFall var(--fall-duration, 1.9s) linear forwards;
     }
 
-    @keyframes confettiFall {
+    @keyframes catRainFall {
       0% {
         opacity: 1;
-        transform: translate(0, 0) scale(1) rotate(0deg);
+        transform: translate3d(0, -20px, 0) rotate(0deg) scale(0.95);
+      }
+      85% {
+        opacity: 1;
       }
       100% {
         opacity: 0;
-        transform: translate(var(--dx), var(--dy)) scale(0.4) rotate(320deg);
+        transform: translate3d(var(--drift-x, 0px), calc(100vh + 50px), 0) rotate(var(--spin, 240deg)) scale(1.05);
+      }
+    }
+
+    /* Balõezinhos de fala ("miau" / "bora") */
+    .speech-bubble {
+      position: fixed;
+      pointer-events: none;
+      user-select: none;
+      z-index: 10000;
+      background: rgba(24, 24, 27, 0.96);
+      color: #fdf4ff;
+      border: 1px solid #ec4899;
+      border-radius: 999px;
+      padding: 4px 11px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+      transform: translate(-50%, -100%);
+      animation: bubblePop 1.15s ease-out forwards;
+    }
+
+    @keyframes bubblePop {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -70%) scale(0.75);
+      }
+      20% {
+        opacity: 1;
+        transform: translate(-50%, -105%) scale(1.04);
+      }
+      80% {
+        opacity: 1;
+        transform: translate(-50%, -130%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -150%) scale(0.9);
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       #cat-follower,
       .rainbow-trail,
-      .confetti-particle,
+      .cat-rain-item,
+      .speech-bubble,
       .chaos-btn {
         display: none !important;
       }
@@ -594,7 +629,7 @@
       
       <!-- BANNER DO TECH LAB -->
       <div class="footer-banner">
-        <img src="banner.png" alt="Banner Girls In Cortex - Tech Lab[span_0](start_span)"[span_0](end_span)>
+        <img src="banner.png" alt="Banner Girls In Cortex - Tech Lab[span_2](start_span)"[span_2](end_span)>
       </div>
 
       <h2 class="gradient-text">Contato</h2>
@@ -606,7 +641,7 @@
     </div>
   </footer>
 
-  <!-- BOTÃO MODO MIAU & GATINHO SEGUIDOR / MASCOTE -->
+  <!-- BOTÃO MODO MIAU & GATINHO SEGUIDOR / PATRULHA -->
   <button class="chaos-btn" id="miau-btn" type="button">🐾 Modo Miau!</button>
 
   <div id="cat-follower" aria-label="Gatinho mascote" role="button" tabindex="0">
@@ -622,14 +657,13 @@
       if (!cat || !sprite || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
       const rainbowColors = ['#ff595e', '#ff924c', '#ffca3a', '#8ac926', '#1982c4', '#6a4c93'];
-      const confettiEmojis = ['✨', '🌟', '💖', '🐾', '🎉', '🌈'];
+      const rainEmojis = ['🐱', '🐈', '✨', '💖', '🐾', '🌟', '💜'];
+      const bubbleWords = ['miau', 'bora', 'miau!', 'bora!'];
       const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
 
       let targetX = -100, targetY = -100;
       let currentX = -100, currentY = -100;
       let lastTrailX = -100, lastTrailY = -100;
-      let lastTouchTrailX = null, lastTouchTrailY = null;
-      let tiltOffsetX = 0;
       let colorIndex = 0;
       let facing = 1;
       let popTimer = null;
@@ -637,6 +671,16 @@
       let tapCount = 0;
       let isHoveringElement = false;
       let gyroEnabled = false;
+      let scrollBounceOffset = 0;
+      let scrollBounceTimer = null;
+
+      // Estado de patrulha / passeio no celular
+      let patrolX = 36;
+      let patrolY = Math.max(140, window.innerHeight - 130);
+      let patrolTargetX = Math.min(window.innerWidth - 64, 240);
+      let patrolTargetY = patrolY;
+      let patrolPauseUntil = 0;
+      let walkPhase = 0;
 
       const offsetX = 16, offsetY = 16;
       const speed = 0.15;
@@ -660,21 +704,41 @@
         document.body.appendChild(dot);
       }
 
-      function spawnConfetti(x, y, count = 18) {
+      function spawnSpeechBubble(x, y, customWord = null) {
+        const word = customWord || bubbleWords[Math.floor(Math.random() * bubbleWords.length)];
+        const bubble = document.createElement('span');
+        bubble.className = 'speech-bubble';
+        bubble.textContent = word;
+
+        const clampedX = Math.max(46, Math.min(window.innerWidth - 46, x));
+        const clampedY = Math.max(42, Math.min(window.innerHeight - 36, y));
+        bubble.style.left = `${clampedX}px`;
+        bubble.style.top = `${clampedY}px`;
+
+        bubble.addEventListener('animationend', () => bubble.remove(), { once: true });
+        document.body.appendChild(bubble);
+      }
+
+      function spawnCatRain(count = 26) {
         for (let i = 0; i < count; i++) {
-          const p = document.createElement('span');
-          p.className = 'confetti-particle';
-          p.textContent = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
-          p.style.left = `${x}px`;
-          p.style.top = `${y}px`;
+          const item = document.createElement('span');
+          item.className = 'cat-rain-item';
+          item.textContent = rainEmojis[Math.floor(Math.random() * rainEmojis.length)];
 
-          const dx = (Math.random() - 0.5) * 160;
-          const dy = (Math.random() - 0.7) * 160;
-          p.style.setProperty('--dx', `${dx}px`);
-          p.style.setProperty('--dy', `${dy}px`);
+          const startLeft = Math.random() * (window.innerWidth - 32) + 8;
+          const driftX = (Math.random() - 0.5) * 90;
+          const spin = (Math.random() > 0.5 ? 1 : -1) * (160 + Math.random() * 240);
+          const duration = 1.45 + Math.random() * 1.1;
+          const delay = Math.random() * 0.45;
 
-          p.addEventListener('animationend', () => p.remove(), { once: true });
-          document.body.appendChild(p);
+          item.style.left = `${startLeft}px`;
+          item.style.setProperty('--drift-x', `${driftX.toFixed(0)}px`);
+          item.style.setProperty('--spin', `${spin.toFixed(0)}deg`);
+          item.style.setProperty('--fall-duration', `${duration.toFixed(2)}s`);
+          item.style.animationDelay = `${delay.toFixed(2)}s`;
+
+          item.addEventListener('animationend', () => item.remove(), { once: true });
+          document.body.appendChild(item);
         }
       }
 
@@ -684,14 +748,10 @@
         const handleOrientation = (event) => {
           if (typeof event.gamma !== 'number') return;
           const clampedGamma = Math.max(-25, Math.min(25, event.gamma));
-          tiltOffsetX = (clampedGamma / 25) * 18;
-          if (Math.abs(clampedGamma) > 2) {
-            facing = clampedGamma < 0 ? -1 : 1;
-          }
-          if (isTouchDevice) {
-            cat.style.transform = `translate3d(${tiltOffsetX.toFixed(1)}px, 0, 0)`;
-            sprite.style.transform = `scaleX(${facing})${sprite.classList.contains('is-popping') ? ' scale(1.32) rotate(-10deg)' : ''}`;
-          }
+          patrolTargetX = Math.max(
+            24,
+            Math.min(window.innerWidth - 56, patrolTargetX + (clampedGamma / 25) * 6)
+          );
         };
 
         if (typeof DeviceOrientationEvent.requestPermission === 'function') {
@@ -709,6 +769,16 @@
         }
       }
 
+      function pickNextPatrolSpot() {
+        const marginX = 32;
+        const maxX = Math.max(marginX + 20, window.innerWidth - 64);
+        const minY = 110;
+        const maxY = Math.max(minY + 40, window.innerHeight - 115);
+
+        patrolTargetX = marginX + Math.random() * (maxX - marginX);
+        patrolTargetY = minY + Math.random() * (maxY - minY);
+      }
+
       miauBtn?.addEventListener('click', (e) => {
         e.stopPropagation();
         enableGyroscope();
@@ -717,22 +787,49 @@
         sprite.textContent = '😻';
         sprite.classList.add('is-popping');
 
-        const rect = isTouchDevice
-          ? cat.getBoundingClientRect()
-          : { left: currentX + 10, top: currentY + 10 };
-
-        spawnConfetti(rect.left + 12, rect.top + 12, 20);
+        spawnCatRain(28);
+        spawnSpeechBubble(currentX + 16, currentY - 6, 'miau!');
+        setTimeout(() => {
+          spawnSpeechBubble(window.innerWidth * 0.65, Math.max(90, currentY - 24), 'bora!');
+        }, 220);
 
         clearTimeout(popTimer);
         popTimer = setTimeout(() => {
-          sprite.textContent = isHoveringElement ? '😺' : '🐱';
+          sprite.textContent = '🐱';
           sprite.classList.remove('is-popping');
-        }, 600);
+        }, 650);
       });
 
       if (isTouchDevice) {
         cat.classList.add('is-mobile-mascot');
+        currentX = patrolX;
+        currentY = patrolY;
 
+        // Reação ao rolar a página no celular
+        window.addEventListener('scroll', () => {
+          scrollBounceOffset = -10;
+          clearTimeout(scrollBounceTimer);
+          scrollBounceTimer = setTimeout(() => {
+            scrollBounceOffset = 0;
+          }, 160);
+        }, { passive: true });
+
+        // Caminha até onde o usuário toca na tela (sem atrapalhar links, botões ou FAQ)
+        document.addEventListener('click', (e) => {
+          if (e.target.closest('a, button, summary, details, input, textarea, select, #cat-follower')) {
+            return;
+          }
+          const clampedX = Math.max(24, Math.min(window.innerWidth - 56, e.clientX - 18));
+          const clampedY = Math.max(105, Math.min(window.innerHeight - 110, e.clientY - 18));
+          patrolTargetX = clampedX;
+          patrolTargetY = clampedY;
+          patrolPauseUntil = 0;
+          if (Math.random() < 0.35) {
+            spawnSpeechBubble(e.clientX, e.clientY - 14, 'bora');
+          }
+        }, { passive: true });
+
+        // Toque simples / duplo no próprio gatinho
         cat.addEventListener('click', (e) => {
           e.stopPropagation();
           enableGyroscope();
@@ -740,19 +837,17 @@
 
           tapCount++;
           clearTimeout(tapTimer);
-
-          const rect = cat.getBoundingClientRect();
-          const centerX = rect.left + rect.width / 2;
-          const centerY = rect.top + rect.height / 2;
+          patrolPauseUntil = performance.now() + 900;
 
           if (tapCount >= 2) {
             document.body.classList.toggle('soft-theme');
             sprite.textContent = '🌟';
-            spawnConfetti(centerX, centerY, 16);
+            spawnSpeechBubble(currentX + 18, currentY - 8, 'bora!');
+            spawnCatRain(14);
             tapCount = 0;
           } else {
             sprite.textContent = '😸';
-            spawnConfetti(centerX, centerY, 10);
+            spawnSpeechBubble(currentX + 18, currentY - 8);
             tapTimer = setTimeout(() => {
               tapCount = 0;
             }, 280);
@@ -763,31 +858,52 @@
           popTimer = setTimeout(() => {
             sprite.textContent = '🐱';
             sprite.classList.remove('is-popping');
-          }, 420);
+          }, 450);
         });
 
-        window.addEventListener('touchmove', (e) => {
-          const touch = e.touches[0];
-          if (!touch) return;
+        window.addEventListener('resize', () => {
+          patrolTargetX = Math.max(24, Math.min(window.innerWidth - 56, patrolTargetX));
+          patrolTargetY = Math.max(105, Math.min(window.innerHeight - 110, patrolTargetY));
+        });
 
-          if (lastTouchTrailX === null || lastTouchTrailY === null) {
-            lastTouchTrailX = touch.clientX;
-            lastTouchTrailY = touch.clientY;
-            return;
+        function animateMobile() {
+          const now = performance.now();
+          const dx = patrolTargetX - currentX;
+          const dy = patrolTargetY - currentY;
+          const dist = Math.hypot(dx, dy);
+
+          if (now >= patrolPauseUntil) {
+            if (dist < 8) {
+              patrolPauseUntil = now + 1100 + Math.random() * 1100;
+              pickNextPatrolSpot();
+            } else {
+              const stepSpeed = 1.65;
+              const moveX = (dx / dist) * Math.min(stepSpeed, dist);
+              const moveY = (dy / dist) * Math.min(stepSpeed, dist);
+              currentX += moveX;
+              currentY += moveY;
+              walkPhase += 0.22;
+
+              if (Math.abs(moveX) > 0.2) {
+                facing = moveX < 0 ? -1 : 1;
+              }
+            }
           }
 
-          const dist = Math.hypot(touch.clientX - lastTouchTrailX, touch.clientY - lastTouchTrailY);
-          if (dist >= 16) {
-            spawnRainbowDot(touch.clientX, touch.clientY, 0, 0);
-            lastTouchTrailX = touch.clientX;
-            lastTouchTrailY = touch.clientY;
-          }
-        }, { passive: true });
+          const hopY = dist >= 8 && now >= patrolPauseUntil ? Math.abs(Math.sin(walkPhase)) * -5 : 0;
+          const finalY = currentY + hopY + scrollBounceOffset;
 
-        window.addEventListener('touchend', () => {
-          lastTouchTrailX = null;
-          lastTouchTrailY = null;
-        }, { passive: true });
+          cat.style.transform = `translate3d(${currentX.toFixed(1)}px, ${finalY.toFixed(1)}px, 0)`;
+
+          let extraTransform = '';
+          if (sprite.classList.contains('is-popping')) extraTransform = ' scale(1.34) rotate(-10deg)';
+          else if (dist >= 8 && now >= patrolPauseUntil) extraTransform = ` rotate(${(Math.sin(walkPhase) * 6).toFixed(1)}deg)`;
+
+          sprite.style.transform = `scaleX(${facing})${extraTransform}`;
+          requestAnimationFrame(animateMobile);
+        }
+
+        requestAnimationFrame(animateMobile);
       } else {
         window.addEventListener('pointermove', (e) => {
           if (e.pointerType === 'touch') return;
@@ -830,7 +946,7 @@
           });
         });
 
-        function animate() {
+        function animateDesktop() {
           const dx = targetX - currentX;
           const dy = targetY - currentY;
 
@@ -844,7 +960,7 @@
           cat.style.transform = `translate3d(${currentX.toFixed(1)}px, ${currentY.toFixed(1)}px, 0)`;
 
           let extraTransform = '';
-          if (sprite.classList.contains('is-popping')) extraTransform = ' scale(1.32) rotate(-10deg)';
+          if (sprite.classList.contains('is-popping')) extraTransform = ' scale(1.34) rotate(-10deg)';
           else if (sprite.classList.contains('is-happy')) extraTransform = ' scale(1.18) rotate(8deg)';
 
           sprite.style.transform = `scaleX(${facing})${extraTransform}`;
@@ -856,10 +972,10 @@
             lastTrailY = currentY;
           }
 
-          requestAnimationFrame(animate);
+          requestAnimationFrame(animateDesktop);
         }
 
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animateDesktop);
       }
     })();
   </script>
