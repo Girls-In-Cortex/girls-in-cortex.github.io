@@ -23,6 +23,17 @@
       --border-color: #27272a;  /* Borda sutil */
     }
 
+    /* Variação suave ativada por toque duplo no mascote no celular */
+    body.soft-theme {
+      --primary: #ec4899;
+      --bg-black: #090612;
+      --card-bg: #161026;
+      --card-header: #201738;
+      --text-light: #fdf4ff;
+      --text-muted: #c4b5fd;
+      --border-color: #35255c;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -34,6 +45,7 @@
       background-color: var(--bg-black);
       color: var(--text-light);
       line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     a {
@@ -137,6 +149,12 @@
       padding: 24px;
       border-radius: 8px;
       border: 1px solid var(--border-color);
+      transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
     }
 
     .service-card h3 {
@@ -227,10 +245,11 @@
 
     /* FOOTER */
     footer {
-      padding: 50px 0;
+      padding: 50px 0 96px;
       text-align: center;
       color: var(--text-muted);
       background-color: var(--bg-black);
+      transition: background-color 0.3s ease;
     }
 
     footer ul {
@@ -253,6 +272,134 @@
       footer ul {
         flex-direction: column;
         gap: 10px;
+      }
+    }
+
+    /* =========================================================
+       GATINHO SEGUIDOR, ARCO-ÍRIS, MODO MIAU & MOBILE
+    ========================================================= */
+
+    /* Botão flutuante Modo Miau */
+    .chaos-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      color: #ffffff;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      z-index: 9990;
+    }
+
+    .chaos-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 8px 24px rgba(236, 72, 153, 0.45);
+    }
+
+    /* Gatinho no desktop: segue o cursor com inércia */
+    #cat-follower {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      user-select: none;
+      z-index: 9999;
+      transform: translate3d(-100px, -100px, 0);
+      will-change: transform;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    /* Gatinho no celular: mascote clicável no canto inferior esquerdo */
+    #cat-follower.is-mobile-mascot {
+      top: auto;
+      left: 20px;
+      bottom: 20px;
+      opacity: 1;
+      pointer-events: auto;
+      cursor: pointer;
+      transform: none;
+      transition: transform 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .cat-sprite {
+      display: inline-block;
+      font-size: 1.75rem;
+      line-height: 1;
+      transition: transform 0.15s ease;
+    }
+
+    #cat-follower.is-mobile-mascot .cat-sprite {
+      font-size: 2.25rem;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+    }
+
+    .cat-sprite.is-popping {
+      transform: scale(1.32) rotate(-10deg);
+    }
+
+    .cat-sprite.is-happy {
+      transform: scale(1.18) rotate(8deg);
+    }
+
+    /* Partículas do rastro de arco-íris */
+    .rainbow-trail {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      pointer-events: none;
+      user-select: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%) scale(1);
+      animation: rainbowFade 0.65s ease-out forwards;
+    }
+
+    @keyframes rainbowFade {
+      0% {
+        opacity: 0.92;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, 8px) scale(0.2);
+      }
+    }
+
+    /* Confetes / estrelinhas no Modo Miau ou toque no mascote */
+    .confetti-particle {
+      position: fixed;
+      pointer-events: none;
+      user-select: none;
+      z-index: 9997;
+      font-size: 1.15rem;
+      animation: confettiFall 1.15s ease-out forwards;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(0.4) rotate(320deg);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #cat-follower,
+      .rainbow-trail,
+      .confetti-particle,
+      .chaos-btn {
+        display: none !important;
       }
     }
   </style>
@@ -296,27 +443,27 @@
     <section id="o-que-fazemos">
       <h2 class="gradient-text">O que fazemos</h2>
       <div class="services-grid">
-        <div class="service-card">
+        <div class="service-card cat-reactive">
           <h3>Produto e dados</h3>
           <p>Descoberta, priorização e análise para entender o que realmente importa ao usuário.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card cat-reactive">
           <h3>UX/UI</h3>
           <p>Pesquisa, prototipação e design de interfaces focados no utilizador.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card cat-reactive">
           <h3>Desenvolvimento Back-end e Front-end</h3>
           <p>Aplicações web completas, do banco de dados à interface gráfica.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card cat-reactive">
           <h3>QA</h3>
           <p>Testes rigorosos e garantia de qualidade ao longo de todo o ciclo de desenvolvimento.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card cat-reactive">
           <h3>Infraestrutura e DevSecOps</h3>
           <p>CI/CD, containers, automação e segurança integrada ao desenvolvimento.</p>
         </div>
-        <div class="service-card">
+        <div class="service-card cat-reactive">
           <h3>Mentoria</h3>
           <p>Apoio contínuo a quem está a começar ou em transição para a área de tecnologia.</p>
         </div>
@@ -447,7 +594,7 @@
       
       <!-- BANNER DO TECH LAB -->
       <div class="footer-banner">
-        <img src="banner.png" alt="Banner Girls In Cortex - Tech Lab">
+        <img src="banner.png" alt="Banner Girls In Cortex - Tech Lab[span_0](start_span)"[span_0](end_span)>
       </div>
 
       <h2 class="gradient-text">Contato</h2>
@@ -458,6 +605,264 @@
       </ul>
     </div>
   </footer>
+
+  <!-- BOTÃO MODO MIAU & GATINHO SEGUIDOR / MASCOTE -->
+  <button class="chaos-btn" id="miau-btn" type="button">🐾 Modo Miau!</button>
+
+  <div id="cat-follower" aria-label="Gatinho mascote" role="button" tabindex="0">
+    <span class="cat-sprite">🐱</span>
+  </div>
+
+  <script>
+    (() => {
+      const cat = document.getElementById('cat-follower');
+      const sprite = cat?.querySelector('.cat-sprite');
+      const miauBtn = document.getElementById('miau-btn');
+
+      if (!cat || !sprite || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const rainbowColors = ['#ff595e', '#ff924c', '#ffca3a', '#8ac926', '#1982c4', '#6a4c93'];
+      const confettiEmojis = ['✨', '🌟', '💖', '🐾', '🎉', '🌈'];
+      const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
+
+      let targetX = -100, targetY = -100;
+      let currentX = -100, currentY = -100;
+      let lastTrailX = -100, lastTrailY = -100;
+      let lastTouchTrailX = null, lastTouchTrailY = null;
+      let tiltOffsetX = 0;
+      let colorIndex = 0;
+      let facing = 1;
+      let popTimer = null;
+      let tapTimer = null;
+      let tapCount = 0;
+      let isHoveringElement = false;
+      let gyroEnabled = false;
+
+      const offsetX = 16, offsetY = 16;
+      const speed = 0.15;
+      const trailStep = 12;
+
+      function vibrate(pattern) {
+        if (navigator.vibrate) {
+          navigator.vibrate(pattern);
+        }
+      }
+
+      function spawnRainbowDot(x, y, shiftX = 12, shiftY = 18) {
+        const dot = document.createElement('span');
+        dot.className = 'rainbow-trail';
+        dot.style.left = `${x + shiftX}px`;
+        dot.style.top = `${y + shiftY}px`;
+        dot.style.backgroundColor = rainbowColors[colorIndex % rainbowColors.length];
+        colorIndex++;
+
+        dot.addEventListener('animationend', () => dot.remove(), { once: true });
+        document.body.appendChild(dot);
+      }
+
+      function spawnConfetti(x, y, count = 18) {
+        for (let i = 0; i < count; i++) {
+          const p = document.createElement('span');
+          p.className = 'confetti-particle';
+          p.textContent = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+          p.style.left = `${x}px`;
+          p.style.top = `${y}px`;
+
+          const dx = (Math.random() - 0.5) * 160;
+          const dy = (Math.random() - 0.7) * 160;
+          p.style.setProperty('--dx', `${dx}px`);
+          p.style.setProperty('--dy', `${dy}px`);
+
+          p.addEventListener('animationend', () => p.remove(), { once: true });
+          document.body.appendChild(p);
+        }
+      }
+
+      function enableGyroscope() {
+        if (gyroEnabled || typeof DeviceOrientationEvent === 'undefined') return;
+
+        const handleOrientation = (event) => {
+          if (typeof event.gamma !== 'number') return;
+          const clampedGamma = Math.max(-25, Math.min(25, event.gamma));
+          tiltOffsetX = (clampedGamma / 25) * 18;
+          if (Math.abs(clampedGamma) > 2) {
+            facing = clampedGamma < 0 ? -1 : 1;
+          }
+          if (isTouchDevice) {
+            cat.style.transform = `translate3d(${tiltOffsetX.toFixed(1)}px, 0, 0)`;
+            sprite.style.transform = `scaleX(${facing})${sprite.classList.contains('is-popping') ? ' scale(1.32) rotate(-10deg)' : ''}`;
+          }
+        };
+
+        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+          DeviceOrientationEvent.requestPermission()
+            .then((state) => {
+              if (state === 'granted') {
+                gyroEnabled = true;
+                window.addEventListener('deviceorientation', handleOrientation, { passive: true });
+              }
+            })
+            .catch(() => {});
+        } else {
+          gyroEnabled = true;
+          window.addEventListener('deviceorientation', handleOrientation, { passive: true });
+        }
+      }
+
+      miauBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        enableGyroscope();
+        vibrate([30, 20, 40]);
+
+        sprite.textContent = '😻';
+        sprite.classList.add('is-popping');
+
+        const rect = isTouchDevice
+          ? cat.getBoundingClientRect()
+          : { left: currentX + 10, top: currentY + 10 };
+
+        spawnConfetti(rect.left + 12, rect.top + 12, 20);
+
+        clearTimeout(popTimer);
+        popTimer = setTimeout(() => {
+          sprite.textContent = isHoveringElement ? '😺' : '🐱';
+          sprite.classList.remove('is-popping');
+        }, 600);
+      });
+
+      if (isTouchDevice) {
+        cat.classList.add('is-mobile-mascot');
+
+        cat.addEventListener('click', (e) => {
+          e.stopPropagation();
+          enableGyroscope();
+          vibrate(45);
+
+          tapCount++;
+          clearTimeout(tapTimer);
+
+          const rect = cat.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+
+          if (tapCount >= 2) {
+            document.body.classList.toggle('soft-theme');
+            sprite.textContent = '🌟';
+            spawnConfetti(centerX, centerY, 16);
+            tapCount = 0;
+          } else {
+            sprite.textContent = '😸';
+            spawnConfetti(centerX, centerY, 10);
+            tapTimer = setTimeout(() => {
+              tapCount = 0;
+            }, 280);
+          }
+
+          sprite.classList.add('is-popping');
+          clearTimeout(popTimer);
+          popTimer = setTimeout(() => {
+            sprite.textContent = '🐱';
+            sprite.classList.remove('is-popping');
+          }, 420);
+        });
+
+        window.addEventListener('touchmove', (e) => {
+          const touch = e.touches[0];
+          if (!touch) return;
+
+          if (lastTouchTrailX === null || lastTouchTrailY === null) {
+            lastTouchTrailX = touch.clientX;
+            lastTouchTrailY = touch.clientY;
+            return;
+          }
+
+          const dist = Math.hypot(touch.clientX - lastTouchTrailX, touch.clientY - lastTouchTrailY);
+          if (dist >= 16) {
+            spawnRainbowDot(touch.clientX, touch.clientY, 0, 0);
+            lastTouchTrailX = touch.clientX;
+            lastTouchTrailY = touch.clientY;
+          }
+        }, { passive: true });
+
+        window.addEventListener('touchend', () => {
+          lastTouchTrailX = null;
+          lastTouchTrailY = null;
+        }, { passive: true });
+      } else {
+        window.addEventListener('pointermove', (e) => {
+          if (e.pointerType === 'touch') return;
+          targetX = e.clientX + offsetX;
+          targetY = e.clientY + offsetY;
+          cat.style.opacity = '1';
+        }, { passive: true });
+
+        document.addEventListener('pointerleave', () => {
+          cat.style.opacity = '0';
+        });
+
+        window.addEventListener('pointerdown', (e) => {
+          if (e.pointerType === 'touch' || e.target.closest('#miau-btn')) return;
+
+          sprite.textContent = '😸';
+          sprite.classList.add('is-popping');
+
+          clearTimeout(popTimer);
+          popTimer = setTimeout(() => {
+            sprite.textContent = isHoveringElement ? '😺' : '🐱';
+            sprite.classList.remove('is-popping');
+          }, 280);
+        }, { passive: true });
+
+        document.querySelectorAll('.cat-reactive, nav a, summary, tbody tr').forEach((el) => {
+          el.addEventListener('mouseenter', () => {
+            isHoveringElement = true;
+            if (!sprite.classList.contains('is-popping')) {
+              sprite.textContent = '😺';
+              sprite.classList.add('is-happy');
+            }
+          });
+          el.addEventListener('mouseleave', () => {
+            isHoveringElement = false;
+            sprite.classList.remove('is-happy');
+            if (!sprite.classList.contains('is-popping')) {
+              sprite.textContent = '🐱';
+            }
+          });
+        });
+
+        function animate() {
+          const dx = targetX - currentX;
+          const dy = targetY - currentY;
+
+          currentX += dx * speed;
+          currentY += dy * speed;
+
+          if (Math.abs(dx) > 1.5) {
+            facing = dx < 0 ? -1 : 1;
+          }
+
+          cat.style.transform = `translate3d(${currentX.toFixed(1)}px, ${currentY.toFixed(1)}px, 0)`;
+
+          let extraTransform = '';
+          if (sprite.classList.contains('is-popping')) extraTransform = ' scale(1.32) rotate(-10deg)';
+          else if (sprite.classList.contains('is-happy')) extraTransform = ' scale(1.18) rotate(8deg)';
+
+          sprite.style.transform = `scaleX(${facing})${extraTransform}`;
+
+          const distFromLast = Math.hypot(currentX - lastTrailX, currentY - lastTrailY);
+          if (cat.style.opacity === '1' && distFromLast >= trailStep) {
+            spawnRainbowDot(currentX, currentY);
+            lastTrailX = currentX;
+            lastTrailY = currentY;
+          }
+
+          requestAnimationFrame(animate);
+        }
+
+        requestAnimationFrame(animate);
+      }
+    })();
+  </script>
 
 </body>
 </html>
